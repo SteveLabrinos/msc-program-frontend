@@ -1,0 +1,22 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
+ */
+
+.FooterContent {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.FooterContent div {
+    flex: 499px;
+    color: white;
+}
+
+.FooterContent .Icon {
+    color: whitesmoke;
+    margin-left: 1rem;
+    font-size: 2rem;
+}
+
