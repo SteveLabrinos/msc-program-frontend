@@ -4,24 +4,27 @@
 
 .NavigationItems {
     margin: 0;
-    padding: 0;
     list-style: none;
     display: flex;
     flex-flow: column;
     align-items: center;
-    height: 100%;
+    justify-content: space-around;
+    height: 150px;
+    background-color: #9b1335;
+    /*border-bottom: 2px solid #1F3864;*/
 }
 
-.SubNavItems {
-    border-top: 2px solid #187aba;
-    border-bottom: 2px solid #187aba;
-    flex-flow: row;
-    justify-content: space-evenly;
-    margin-bottom: 1rem;
-}
+/*.SubNavItems {*/
+/*    border-top: 2px solid #187aba;*/
+/*    border-bottom: 2px solid #187aba;*/
+/*    flex-flow: row;*/
+/*    justify-content: space-evenly;*/
+/*    margin-bottom: 1rem;*/
+/*}*/
 
 @media (min-width: 500px) {
     .NavigationItems {
         flex-flow: row;
+        height: 50px;
     }
 }

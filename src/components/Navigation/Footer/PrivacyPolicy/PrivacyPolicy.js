@@ -1,5 +1,5 @@
 import React from 'react';
-import privacy from '../../../../assets/statics/privacyPolicy';
+import { staticContent } from '../../../../assets/statics/staticContent';
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -11,7 +11,7 @@ const style = {
 
 const privacyPolicy = () => (
     <ol style={style}>
-        {privacy.map((ctx, index) => (
+        {staticContent.map((ctx, index) => (
             <li key={index}>
                 <h4>{ctx.header}</h4>
                 <p>{ctx.content}</p>

@@ -1,0 +1,35 @@
+.AppTitle {
+    font-size: .7rem;
+    font-weight: 300;
+    color: white;
+    text-align: center;
+    /*position: fixed;*/
+    /*right: 44%;*/
+    margin: .5rem auto;
+}
+
+.AppTitle h5 {
+    margin: .3rem;
+    font-size: .9rem;
+}
+
+.AppTitle p {
+    margin: 0;
+}
+
+.AppTitle span {
+    font-weight: bold;
+    font-size: .8rem;
+}
+
+@media (max-width: 499px) {
+    .AppTitle {
+        display: none;
+    }
+}
+
+@media (min-width: 500px) and (max-width: 850px) {
+    .AppTitle {
+        display: none;
+    }
+}

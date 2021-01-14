@@ -3,6 +3,7 @@
  */
 
 .NavigationItem {
+    height: 30px;
     margin: 10px 0;
     box-sizing: border-box;
     display: block;
@@ -27,7 +28,8 @@
     .NavigationItem {
         margin: 0;
         display: flex;
-        height: 100%;
+        height: 50px;
+        box-sizing: border-box;
         width: auto;
         align-items: center;
     }
@@ -35,14 +37,14 @@
     .NavigationItem a {
         color: white;
         height: 100%;
-        padding: 2rem 10px;
-        /*border-bottom: 5px solid transparent;*/
+        padding: 12px 10px;
+        border-bottom: 5px solid transparent;
     }
 
     .NavigationItem a:hover,
     .NavigationItem a:active,
     .NavigationItem a.active {
-        border-bottom: 5px solid white;
+        border-bottom: 3px solid white;
         color: white;
         transition: all .3s ease 0s;
     }

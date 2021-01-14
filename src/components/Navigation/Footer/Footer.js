@@ -8,8 +8,9 @@ import FooterContent from './FooterContent/FooterContent';
 
 const footer = props => (
     <footer className={classes.Footer}>
-        <FooterContent clicked={props.showPrivacy}/>
-        <div className={classes.Copyright}>&copy; Copyright Maritime Analytics 2020 - 21</div>
+        <FooterContent clickedPrivacy={props.showPrivacy}
+                       clickedTerms={props.showTerms}/>
+        <div className={classes.Copyright}>&copy; Copyright MSc Information Systems 2020 - 21</div>
     </footer>
 );
 

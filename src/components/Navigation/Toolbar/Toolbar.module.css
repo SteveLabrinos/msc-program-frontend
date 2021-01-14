@@ -2,28 +2,31 @@
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
  */
 
-.Toolbar {
-    height: 80px;
-    width: 100%;
+.NavBar {
     position: fixed;
     top: 0;
     left: 0;
-    background-color: #187aba;
+}
+
+
+.Toolbar {
+    height: 88px;
+    width: 100%;
+    /*position: fixed;*/
+    /*top: 0;*/
+    /*left: 0;*/
+    background-color: #9b1335;
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    /*flex-wrap: wrap;*/
     align-items: center;
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 90;
 }
 
-.Toolbar nav {
-    height: 100%;
-}
-
 .Logo {
-    height: 80%;
+    height: 100%;
 }
 
 .Toolbar .AppTitle {
@@ -31,19 +34,17 @@
     font-weight: 300;
     color: white;
     text-transform: uppercase;
-    position: fixed;
-    right: 44%;
-    /*flex: 499px;*/
 }
 
 
-@media (max-width: 499px) {
-    .DesktopOnly, .Logo {
-        display: none;
+@media (max-width: 500px) {
+    .Toolbar {
+        justify-content: center;
     }
 
-    .AppTitle {
-        left: 30%;
+    .Toolbar button,
+    .DesktopOnly {
+        display: none;
     }
 }
 
@@ -52,10 +53,4 @@
         justify-content: space-between;
     }
 
-}
-
-@media (min-width: 500px) and (max-width: 850px) {
-    .AppTitle {
-        display: none;
-    }
 }

@@ -14,9 +14,19 @@
     color: white;
 }
 
+.FooterContent .Container {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1rem;
+}
+
 .FooterContent .Icon {
     color: whitesmoke;
     margin-left: 1rem;
     font-size: 2rem;
+}
+
+@media (max-width: 500px) {
+
 }
 

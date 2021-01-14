@@ -15,12 +15,16 @@ const navigationItems = props => {
                 Αρχική
             </NavigationItem>
             <NavigationItem
-                link="/vessels">
-                Πλοία
+                link="/courses">
+                Μαθήματα
             </NavigationItem>
             <NavigationItem
-                link="/ports">
-                Λιμάνια
+                link="/stuff">
+                Προσωπικό
+            </NavigationItem>
+            <NavigationItem
+                link="/regulation">
+                Κανονισμός Σπουδών
             </NavigationItem>
             <NavigationItem
                 link="/info">

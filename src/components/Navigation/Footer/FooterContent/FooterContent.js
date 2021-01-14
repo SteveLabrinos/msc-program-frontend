@@ -12,29 +12,47 @@ const footerContent = props => {
     const container = {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+    };
+
+    const contactInfo = {
+        flexDirection: 'column',
+        fontSize: '.7rem'
     }
+
+    const buttonGroup = {
+        color: '#ccc'
+    };
 
     return (
         <div className={classes.FooterContent}>
-            <Logo logoType="papeiLogo"/>
-            <div style={container}>
-                Ακολουθήστε μας:
-                <a
-                    href="https://github.com/users/konstantinosraptis91/projects/1"
-                    target="_blank"
-                    rel="noreferrer">
-                    <FaGithub className={classes.Icon}/>
-                </a>
-                <a
-                    href="https://www.facebook.com/groups/1435532373324124"
-                    target="_blank"
-                    rel="noreferrer">
-                    <FaFacebook className={classes.Icon}/>
-                </a>
+            <Logo logoType="eapLogo"/>
+            <div style={container} className={classes.Container}>
+                Επικοινωνήστε μαζί μας:
+                <div style={contactInfo}>
+                    <a
+                        href="https://github.com/SteveLabrinos/msc-program-frontend"
+                        target="_blank"
+                        rel="noreferrer">
+                        <FaGithub className={classes.Icon}/>
+                    </a>
+                    <div>
+                        Τηλέφωνο:
+                        <a href="tel:210-9988665"> 210-9988665</a>
+                    </div>
+                    <div>
+                        Email:
+                        <a href="mailto:webmaster@example.com"> webmaster@example.com</a>
+                    </div>
+                </div>
             </div>
-            <div>
-                <Button clicked={props.clicked}
+            <div style={buttonGroup}>
+                <Button clicked={props.clickedTerms}
+                        btnType="Link">
+                    Όροι Χρήσης
+                </Button>
+                 |
+                <Button clicked={props.clickedPrivacy}
                         btnType="Link">
                     Πολιτική Απορρήτου
                 </Button>

@@ -1,40 +1,41 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
-import vesselLogo from '../../assets/images/SHIP_2_small_white.png';
-import papeiImg from '../../assets/images/papeiLogo.png'
+import edulLogo from '../../assets/images/Educational-Logo.png';
+import eapImg from '../../assets/images/eap-logo.png'
 import classes from './Logo.module.css';
 
 /**
- * @author Stavros Lamprinos [stalab at linuxmail.org] on 22/12/2020.
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 14/1/2021.
  */
 
 const logo = props => {
-    //  Including basic logic to make the Logo reusable  Stavros Lamprinos on 23/12/2020
-    let preferences = {link : '/'}
+    let preferences = {link: '/'}
 
     switch (props.logoType) {
         case ('appLogo'):
-            preferences.src = vesselLogo;
-            preferences.alt = 'Vessel logo';
+            preferences.src = edulLogo;
+            preferences.alt = 'Applications education logo';
             break;
-        case('papeiLogo'):
-            preferences.link = 'https://www.ds.unipi.gr/';
-            preferences.src = papeiImg;
+        case('eapLogo'):
+            preferences.link = 'https://www.eap.gr';
+            preferences.src = eapImg;
             preferences.target = '_black';
             preferences.rel = 'noreferrer';
-            preferences.alt = 'Logo of University of Piraeus';
+            preferences.alt = 'Logo of Hellenic Open University';
             break;
         default:
             break;
     }
 
-    const link = props.logoType === 'papeiLogo' ?
+    const link = props.logoType === 'eapLogo' ?
         <a href={preferences.link}
            target={preferences.target}
            rel={preferences.rel}>
             <img src={preferences.src}
-                 alt={preferences.alt}/>
+                 alt={preferences.alt}
+                 height="40%"
+                 width="40%"/>
         </a> :
         <Link to={preferences.link}>
             <img src={preferences.src}

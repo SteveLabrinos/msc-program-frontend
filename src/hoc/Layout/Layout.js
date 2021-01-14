@@ -5,7 +5,8 @@ import Footer from '../../components/Navigation/Footer/Footer';
 import Modal from '../../components/UI/Modal/Modal';
 
 import classes from './Layout.module.css';
-import PrivacyPolicy from "../../components/Navigation/Footer/PrivacyPolicy/PrivacyPolicy";
+import PrivacyPolicy from '../../components/Navigation/Footer/PrivacyPolicy/PrivacyPolicy';
+import TermsOfUse from '../../components/Navigation/Footer/TermsOfUse/TermsOfUse';
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -15,7 +16,16 @@ class Layout extends Component {
 
     state = {
         showSideDrawer: false,
-        showPrivacy: false
+        showPrivacy: false,
+        showTerms: false,
+
+        //  Static content. This will be retrieved from the backend
+
+        appTitle: {
+            program: 'Πληροφοριακά Συστήματα',
+            department: 'Πληροφορικής',
+            university: 'Ελληνικό Ανοιχτό Πανεπιστήμιο'
+        }
     }
 
     sideDrawerClosedHandler = () => {
@@ -33,8 +43,16 @@ class Layout extends Component {
         this.setState({showPrivacy: true});
     }
 
+    termsHandler = () => {
+        this.setState({showTerms: true});
+    }
+
     privacyCancelHandler = () => {
         this.setState({showPrivacy: false});
+    }
+
+    termsCancelHandler = () => {
+        this.setState({showTerms: false});
     }
 
 
@@ -42,12 +60,17 @@ class Layout extends Component {
 
         return (
             <Fragment>
-                <div style={{minHeight: 'calc(65vh - 10px)'}}>
+                <div style={{minHeight: 'calc(84vh - 9px)'}}>
                     <Modal show={this.state.showPrivacy}
                            closeModal={this.privacyCancelHandler}>
                         <PrivacyPolicy/>
                     </Modal>
-                    <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}/>
+                    <Modal show={this.state.showTerms}
+                           closeModal={this.termsCancelHandler}>
+                        <TermsOfUse/>
+                    </Modal>
+                    <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}
+                             content={this.state.appTitle}/>
                     <SideDrawer
                         open={this.state.showSideDrawer}
                         closed={this.sideDrawerClosedHandler}/>
@@ -55,7 +78,8 @@ class Layout extends Component {
                         {this.props.children}
                     </main>
                 </div>
-                <Footer showPrivacy={this.privacyHandler}/>
+                <Footer showPrivacy={this.privacyHandler}
+                        showTerms={this.termsHandler}/>
             </Fragment>
         );
     }
