@@ -11,9 +11,10 @@ import classes from './Cockpit.module.css';
 const cockpit = props => {
 
     return (
-        <Container maxWidth="md">
+        <Container maxWidth="lg">
             <Typography className={classes.Title}
-                        variant="h4">
+                        variant="h3"
+                        component="h2">
                 {props.title}
             </Typography>
         </Container>

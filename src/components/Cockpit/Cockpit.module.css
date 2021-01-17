@@ -2,9 +2,9 @@
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
  */
 
-.Title {
-    font-weight: normal;
-    font-size: 28px;
+div .Title {
+    /*font-weight: normal;*/
+    /*font-size: 28px;*/
     color: #002d52;
     margin: 2% 0 3%;
     position: relative;
