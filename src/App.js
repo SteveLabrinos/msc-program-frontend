@@ -9,6 +9,7 @@ const AnnouncementsBuilder = React.lazy(() => import(`./containers/Announcements
 const FullAnnouncement = React.lazy(() => import(`./containers/FullAnnouncement/FullAnnouncement`));
 const Regulation = React.lazy(() => import(`./components/Regulation/Regulation`));
 const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
+const Courses = React.lazy(() => import(`./containers/Courses/Courses`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -16,7 +17,7 @@ const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <Layout>
           <Switch>
               <Route path="/" exact component={ FrontBuilder } />
@@ -40,9 +41,14 @@ function App() {
                       <Stuff {...props} />
                   </Suspense>
               )} />
+              <Route path="/courses" render={() => (
+                  <Suspense fallback={ <Spinner /> }>
+                      <Courses />
+                  </Suspense>
+              )} />
           </Switch>
       </Layout>
-    </div>
+    </React.Fragment>
   );
 }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import {
-    Hidden, Typography, CardMedia,
-    CardContent, Link, Card, useMediaQuery
+    Typography, CardMedia, CardContent,
+    Link, Card, useMediaQuery
 } from '@material-ui/core';
 import {makeStyles} from "@material-ui/core/styles";
 import '../../assets/images/stuff/s1.jfif'
@@ -24,6 +24,7 @@ const Stuff = props => {
         media: {
             height: 150,
             width: 100,
+            borderRadius: '4px',
             backgroundRepeat: 'no-repeat'
         },
         h5: {

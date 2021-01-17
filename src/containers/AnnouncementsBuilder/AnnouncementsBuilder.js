@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {announce} from '../../assets/statics/staticContent';
+import { announce } from '../../assets/statics/staticContent';
 import Cockpit from '../../components/Cockpit/Cockpit';
 import Announcements from '../../components/Announcements/Announcements';
 

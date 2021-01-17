@@ -206,4 +206,127 @@ const workingStuff = [
     }
 ]
 
-export  { staticContent, terms, announce, reg, workingStuff };
+const coursesList = {
+    headers: [
+        {
+            id: 'time',
+            name: 'Εξάμηνο'
+        },
+        {
+            id: 'course',
+            name: 'Μάθημα'
+        },
+        {
+            id: 'teacher',
+            name: 'Διδάσκων'
+        },
+        {
+            id: 'units',
+            name: 'Διδακτικές Μονάδες'
+        },
+        {
+            id: 'type',
+            name: 'Είδος'
+        }
+    ],
+    courses: [
+        {
+            id: 'c1',
+            time: 1,
+            name: 'Η γλώσσα προγραμματισμού Java',
+            teacher: 'Μάρκος Γεωργίου',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c2',
+            time: 1,
+            name: 'Σχεσιακές Βάσεις Δεδομένων',
+            teacher: 'Λάμπρος Σταυρινός',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c3',
+            time: 1,
+            name: 'Κατασκευή Πληροφοριακών Συστημάτω ',
+            teacher: 'Ευαγγελία Καινούργιου',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c4',
+            time: 1,
+            name: 'Διαχείριση επιχειρισιακών διεργασιών',
+            teacher: 'Νίκος Κορόμπος',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c5',
+            time: 2,
+            name: 'Η γλώσσα προγραμματισμού Python',
+            teacher: 'Λάμπρος Σταυρινός',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c6',
+            time: 2,
+            name: 'Αποθήκες Δεδομένων',
+            teacher: 'Μάρκος Γεωργίου',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c7',
+            time: 2,
+            name: 'Μεγάλα Δεδομένα και Αναλυτική',
+            teacher: 'Νίκος Κορόμπος',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c8',
+            time: 2,
+            name: 'Ευφυή Πληροφοριακά Συστήματα',
+            teacher: 'Ευαγγελία Καινούργιου',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c9',
+            time: 3,
+            name: 'Η γλώσσα προγραμματισμού JavaScript',
+            teacher: 'Λάμπρος Σταυρινός',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c10',
+            time: 3,
+            name: 'Μη Σχεσιακές Βάσεις Δεδομένων',
+            teacher: 'Ευαγγελία Καινούργιου',
+            units: 5,
+            type: 'Βασικό'
+        },
+        {
+            id: 'c11',
+            time: 3,
+            name: 'Λειτουργικά Συστήματα',
+            teacher: 'Μάρκος Γεωργίου',
+            units: 5,
+            type: 'Επιλογής'
+        },
+        {
+            id: 'c12',
+            time: 3,
+            name: 'Ασφάλεια Πληροφοριακών Συστημάτων',
+            teacher: 'Νίκος Κορόμπος',
+            units: 5,
+            type: 'Επιλογής'
+        }
+    ]
+}
+
+export  { staticContent, terms, announce, reg, workingStuff, coursesList };
