@@ -20,6 +20,20 @@
     font-size: 1rem;
 }
 
+.FooterContent .Container .ContactInfo {
+    flex-direction: column;
+    font-size: .7rem;
+}
+
+.FooterContent .Container .ContactInfo div a {
+    text-decoration: none;
+    color: #002d52;
+}
+
+.FooterContent .Container .ContactInfo div a:hover {
+    border-bottom: 1px solid #002d52;
+}
+
 .FooterContent .Icon {
     color: whitesmoke;
     margin-left: 1rem;

@@ -3,6 +3,8 @@ import {Route, Switch} from 'react-router-dom';
 
 import Layout from './hoc/Layout/Layout';
 import FrontBuilder from './containers/FrontBuilder/FrontBuilder';
+import AnnouncementsBuilder from './containers/AnnouncementsBuilder/AnnouncementsBuilder';
+import FullAnnouncement from './containers/FullAnnouncement/FullAnnouncement';
 
 // import Spinner from './components/UI/Spinner/Spinner';
 
@@ -15,7 +17,9 @@ function App() {
     <div>
       <Layout>
           <Switch>
-              <Route path="/" exact component={FrontBuilder}/>
+              <Route path="/" exact component={ FrontBuilder } />
+              <Route path="/announcements/:anId" component={ FullAnnouncement } />
+              <Route path="/announcements" component={ AnnouncementsBuilder } />
           </Switch>
       </Layout>
     </div>

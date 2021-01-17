@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaGithub, FaFacebook} from 'react-icons/all';
+import { FaGithub } from 'react-icons/all';
 import classes from './FooterContent.module.css';
 import Button from '../../../UI/Button/Button';
 import Logo from "../../../Logo/Logo";
@@ -15,10 +15,10 @@ const footerContent = props => {
         justifyContent: 'center',
     };
 
-    const contactInfo = {
-        flexDirection: 'column',
-        fontSize: '.7rem'
-    }
+    // const contactInfo = {
+    //     flexDirection: 'column',
+    //     fontSize: '.7rem'
+    // }
 
     const buttonGroup = {
         color: '#ccc'
@@ -29,7 +29,7 @@ const footerContent = props => {
             <Logo logoType="eapLogo"/>
             <div style={container} className={classes.Container}>
                 Επικοινωνήστε μαζί μας:
-                <div style={contactInfo}>
+                <div className={classes.ContactInfo}>
                     <a
                         href="https://github.com/SteveLabrinos/msc-program-frontend"
                         target="_blank"

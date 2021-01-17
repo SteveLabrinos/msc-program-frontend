@@ -26,10 +26,11 @@ const navigationItems = props => {
                 link="/regulation">
                 Κανονισμός Σπουδών
             </NavigationItem>
-            <NavigationItem
-                link="/info">
-                Πληροφορίες
-            </NavigationItem>
+            {/* To be implemented in later phase */}
+            {/*<NavigationItem*/}
+            {/*    link="/info">*/}
+            {/*    Πληροφορίες*/}
+            {/*</NavigationItem>*/}
         </ul>
     );
 };

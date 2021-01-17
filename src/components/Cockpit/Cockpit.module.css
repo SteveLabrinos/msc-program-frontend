@@ -1,0 +1,21 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
+ */
+
+.Title {
+    font-weight: normal;
+    font-size: 28px;
+    color: #002d52;
+    margin: 2% 0 3%;
+    position: relative;
+}
+
+.Title::after {
+    position: absolute;
+    content: "";
+    height: 7px;
+    width: 8%;
+    bottom: -16px;
+    background: #9b1335;
+    left: 0;
+}

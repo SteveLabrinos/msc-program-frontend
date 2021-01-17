@@ -12,7 +12,7 @@ import Button from '../../UI/Button/Button';
  */
 
 const toolbar = props => (
-    <header>
+    <header className={classes.NavBar}>
         <div className={classes.Toolbar}>
             <DrawerToggle clicked={props.drawerToggleClicked}/>
             <div className={classes.Logo}>
