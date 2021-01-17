@@ -16,7 +16,7 @@ const Announcement = props => {
     // }
     const useStyles = makeStyles({
         root: {
-            maxWidth: '90%',
+            maxWidth: '100%',
             display: 'flex',
             margin: '2rem auto 1rem auto',
             flexDirection: props.reverse ? 'row-reverse' : 'row',

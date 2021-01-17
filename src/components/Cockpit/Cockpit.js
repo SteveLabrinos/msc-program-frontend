@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Container, Typography} from '@material-ui/core';
+import { Container, Typography } from '@material-ui/core';
 import classes from './Cockpit.module.css';
 
 /**

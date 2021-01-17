@@ -8,6 +8,7 @@ import FrontBuilder from './containers/FrontBuilder/FrontBuilder';
 const AnnouncementsBuilder = React.lazy(() => import(`./containers/AnnouncementsBuilder/AnnouncementsBuilder`));
 const FullAnnouncement = React.lazy(() => import(`./containers/FullAnnouncement/FullAnnouncement`));
 const Regulation = React.lazy(() => import(`./components/Regulation/Regulation`));
+const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -32,6 +33,11 @@ function App() {
               <Route path="/regulation" render={() => (
                   <Suspense fallback={ <Spinner /> }>
                       <Regulation />
+                  </Suspense>
+              )} />
+              <Route path="/stuff/:type" render={props => (
+                  <Suspense fallback={ <Spinner /> }>
+                      <Stuff {...props} />
                   </Suspense>
               )} />
           </Switch>

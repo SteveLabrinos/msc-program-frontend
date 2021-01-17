@@ -1,4 +1,10 @@
 import an1Img from '../images/Cards/an1.png';
+import s1 from '../images/stuff/s1.png';
+import s2 from '../images/stuff/s2.jpg';
+import s3 from '../images/stuff/s3.jpg';
+import s4 from '../images/stuff/s4.jpg';
+import s5 from '../images/stuff/s5.jpg';
+import s6 from '../images/stuff/s6.jpg';
 
 
 /**
@@ -131,4 +137,73 @@ const reg = {
     linkDesc: 'Δείτε ολόκλρηρο τον Οδηγό Σπουδών 2020-21'
 }
 
-export  { staticContent, terms, announce, reg };
+const workingStuff = [
+    {
+        id: 's1',
+        type: 'professor',
+        img: s1,
+        alt: 'Εικόνα προφίλ του καθηγητή',
+        firstName: 'Νίκος',
+        lastName: 'Κορόμπος',
+        role: 'Καθηγητής / Αναπληρωτής Καθηγητής',
+        email: 's1_p@test.com',
+        phone: '2101122333'
+    },
+    {
+        id: 's2',
+        type: 'professor',
+        img: s2,
+        alt: 'Εικόνα προφίλ του καθηγητή',
+        firstName: 'Ευαγγελία',
+        lastName: 'Καινούργιου',
+        role: 'Καθηγητής / Αναπληρωτής Καθηγητής',
+        email: 's2_p@test.com',
+        phone: '2101122333'
+    },
+    {
+        id: 's3',
+        type: 'professor',
+        img: s3,
+        alt: 'Εικόνα προφίλ του καθηγητή',
+        firstName: 'Λάμπρος',
+        lastName: 'Σταυρινός',
+        role: 'Καθηγητής',
+        email: 's3_p@test.com',
+        phone: '2101122333'
+    },
+    {
+        id: 's4',
+        type: 'professor',
+        img: s4,
+        alt: 'Εικόνα προφίλ του καθηγητή',
+        firstName: 'Μάρκος',
+        lastName: 'Γεωργίου',
+        role: 'Καθηγητής / Αναπληρωτής Καθηγητής',
+        email: 's4_p@test.com',
+        phone: '2101122333'
+    },
+    {
+        id: 's5',
+        type: 'secretary',
+        img: s5,
+        alt: 'Εικόνα προφίλ του υπαλλήλου γραμματείας',
+        firstName: 'Ιουλία',
+        lastName: 'Εντζί',
+        role: 'Καθηγητής / Αναπληρωτής Καθηγητής',
+        email: 's5_s@test.com',
+        phone: '2101122333'
+    },
+    {
+        id: 's6',
+        type: 'secretary',
+        img: s6,
+        alt: 'Εικόνα προφίλ του υπαλλήλου γραμματείας',
+        firstName: 'Νικόλαος',
+        lastName: 'Τσέλιος',
+        role: 'Καθηγητής / Αναπληρωτής Καθηγητής',
+        email: 's6_s@test.com',
+        phone: '2101122333'
+    }
+]
+
+export  { staticContent, terms, announce, reg, workingStuff };

@@ -19,8 +19,12 @@ const navigationItems = props => {
                 Μαθήματα
             </NavigationItem>
             <NavigationItem
-                link="/stuff">
-                Προσωπικό
+                link="/stuff/professor">
+                Διδάσκοντες
+            </NavigationItem>
+            <NavigationItem
+                link="/stuff/secretary">
+                Γραμματεία
             </NavigationItem>
             <NavigationItem
                 link="/regulation">
