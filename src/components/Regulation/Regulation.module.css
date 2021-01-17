@@ -1,0 +1,26 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 17/1/2021.
+ */
+
+.Container {
+}
+
+.Container article {
+    color: #002d52;
+    font-size: 1.1rem;
+}
+
+.Container p {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+}
+
+.Container .Link a {
+    text-decoration: none;
+    padding-left: .3rem;
+    color: #002d52;
+}
+
+.Container .Link a:hover {
+    border-bottom: 1px solid #002d52;
+}

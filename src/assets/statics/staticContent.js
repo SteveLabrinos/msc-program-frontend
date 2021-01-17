@@ -124,4 +124,11 @@ const announce = [
     }
 ]
 
-export  { staticContent, terms, announce };
+const reg = {
+    title: 'Κανονισμός Σπουδών',
+    article: 'Το ίδρυμα δημιουργήθηκε το έτος 1965 ενώ η διάρθρωσή του ...',
+    link: '/regulation.pdf',
+    linkDesc: 'Δείτε ολόκλρηρο τον Οδηγό Σπουδών 2020-21'
+}
+
+export  { staticContent, terms, announce, reg };
