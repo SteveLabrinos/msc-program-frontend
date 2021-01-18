@@ -1,0 +1,67 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
+ */
+
+/* Added hover dropdown menu from personal Stavros Lamprinos 18/1/21 */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropBtn {
+    background-color: #9b1335;
+    color: white;
+    padding: .9rem;
+    border: none;
+    font-size: 1rem;
+}
+
+.dropdownContent {
+    display: none;
+    position: absolute;
+    background-color: #9b1335;
+    overflow: auto;
+    min-width: 160px;
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, .2);
+    z-index: 1;
+}
+
+.dropdownContent a {
+    padding: .8rem .9rem;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown:hover .dropdownContent{
+    display: block;
+}
+
+.NavigationItems {
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: space-around;
+    height: 150px;
+    background-color: #9b1335;
+}
+
+@media (min-width: 500px) {
+    .NavigationItems {
+        flex-flow: row;
+        height: 50px;
+    }
+}
+
+@media (max-width: 500px) {
+    .dropBtn {
+        color: #cccccc;
+        padding: .9rem 0 .9rem 0;
+    }
+
+    .dropdown {
+        width: 100%;
+    }
+}

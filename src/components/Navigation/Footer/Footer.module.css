@@ -1,0 +1,13 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
+ */
+
+.Footer {
+    padding-top: 1.1rem;
+    padding-bottom: 1rem;
+    background-color: #9b1335;
+    border-top: 0;
+    box-sizing: border-box;
+    color: whitesmoke;
+    text-align: center;
+}

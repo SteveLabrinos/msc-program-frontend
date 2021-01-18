@@ -1,0 +1,20 @@
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
+ */
+
+.Root {
+
+}
+
+.Root .Button {
+    margin: 1.2rem auto;
+    background-color: white;
+    color: #6b859b;
+    border: 3px solid #9b1335;
+}
+
+.Root .Button:hover,
+.Root .Button:active {
+    background-color: #6b859b;
+    color: white;
+}
