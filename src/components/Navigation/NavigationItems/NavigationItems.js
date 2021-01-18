@@ -18,14 +18,21 @@ const navigationItems = props => {
                 link="/courses">
                 Μαθήματα
             </NavigationItem>
-            <NavigationItem
-                link="/stuff/professor">
-                Διδάσκοντες
-            </NavigationItem>
-            <NavigationItem
-                link="/stuff/secretary">
-                Γραμματεία
-            </NavigationItem>
+            <div className={classes.dropdown}>
+                <button className={classes.dropBtn}>
+                    Προσωπικό
+                </button>
+                <div className={classes.dropdownContent}>
+                    <NavigationItem
+                        link="/stuff/professor">
+                        Διδάσκοντες
+                    </NavigationItem>
+                    <NavigationItem
+                        link="/stuff/secretary">
+                        Γραμματεία
+                    </NavigationItem>
+                </div>
+            </div>
             <NavigationItem
                 link="/regulation">
                 Κανονισμός Σπουδών
