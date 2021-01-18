@@ -59,8 +59,8 @@ class Stuffs extends Component {
                 <Spinner /> :
                 <Container>
                     {this.state.stuff.map((stuff, index) => (
-                        <React.Fragment>
-                            <Stuff key={stuff.id}
+                        <React.Fragment key={stuff.id}>
+                            <Stuff
                                    content={stuff} />
                             {index < this.state.stuff.length - 1 ?
                                 <hr style={style}/> : null}

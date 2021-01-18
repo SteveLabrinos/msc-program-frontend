@@ -2,7 +2,8 @@ import React from 'react';
 import { FaGithub } from 'react-icons/all';
 import classes from './FooterContent.module.css';
 import Button from '../../../UI/Button/Button';
-import Logo from "../../../Logo/Logo";
+import Logo from '../../../Logo/Logo';
+import { Hidden } from '@material-ui/core';
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -21,7 +22,7 @@ const footerContent = props => {
     // }
 
     const buttonGroup = {
-        color: '#ccc'
+        // color: '#fff'
     };
 
     return (
@@ -51,7 +52,9 @@ const footerContent = props => {
                         btnType="Link">
                     Όροι Χρήσης
                 </Button>
-                 |
+                <Hidden smDown>
+                    |
+                </Hidden>
                 <Button clicked={props.clickedPrivacy}
                         btnType="Link">
                     Πολιτική Απορρήτου

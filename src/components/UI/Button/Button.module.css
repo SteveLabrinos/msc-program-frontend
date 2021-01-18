@@ -14,11 +14,6 @@
     font-weight: bold;
 }
 
-/*.Button:first-of-type {*/
-/*    margin-left: 0;*/
-/*    padding-left: 0;*/
-/*}*/
-
 .Success {
     color: #5C9210;
     border-color: #5C9210;
@@ -40,7 +35,7 @@
 }
 
 .Link {
-    color: #ccc;
+    color: #fff;
     border: none;
 }
 

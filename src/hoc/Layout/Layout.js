@@ -60,7 +60,7 @@ class Layout extends Component {
 
         return (
             <Fragment>
-                <div style={{minHeight: 'calc(84vh - 9px)'}}>
+                <div style={{minHeight: 'calc(69vh - 11px)'}}>
                     <Modal show={this.state.showPrivacy}
                            closeModal={this.privacyCancelHandler}>
                         <PrivacyPolicy/>

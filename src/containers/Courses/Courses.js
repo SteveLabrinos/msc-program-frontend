@@ -39,7 +39,6 @@ export default function Courses() {
 
         //  static data loading until backend logic is implemented
         setCourses(coursesList);
-        console.log(courses);
         setLoading(false);
     }, [courses]);
 

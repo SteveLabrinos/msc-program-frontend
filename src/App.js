@@ -11,6 +11,7 @@ const Regulation = React.lazy(() => import(`./components/Regulation/Regulation`)
 const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
 const Courses = React.lazy(() => import(`./containers/Courses/Courses`));
 const SignIn = React.lazy(() => import(`./containers/SignIn/SignIn`));
+const Error404 = React.lazy(() => import(`./components/Error404/Error404`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -50,6 +51,11 @@ function App() {
               <Route path="/sign-in" render={() => (
                   <Suspense fallback={ <Spinner /> }>
                       <SignIn />
+                  </Suspense>
+              )} />
+              <Route render={props => (
+                  <Suspense fallback={ <Spinner /> }>
+                      <Error404 {...props} />
                   </Suspense>
               )} />
           </Switch>

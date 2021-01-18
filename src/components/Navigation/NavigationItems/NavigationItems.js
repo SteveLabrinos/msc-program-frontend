@@ -11,7 +11,9 @@ const navigationItems = props => {
     return (
         <ul className={classes.NavigationItems}>
             <NavigationItem
-                link="/" exact>
+                link="/"
+                exact
+                home>
                 Αρχική
             </NavigationItem>
             <NavigationItem
