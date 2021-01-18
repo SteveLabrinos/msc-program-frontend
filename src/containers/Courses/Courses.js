@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
-import { coursesList } from '../../assets/statics/staticContent';
+import {coursesList} from '../../assets/statics/staticContent';
 import Cockpit from '../../components/Cockpit/Cockpit';
-import { makeStyles } from '@material-ui/core/styles';
+import Spinner from '../../components/UI/Spinner/Spinner';
+import {makeStyles} from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -10,62 +11,79 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import {Container, Paper, TableContainer} from '@material-ui/core';
 
-// Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
-    return { id, date, name, shipTo, paymentMethod, amount };
-}
-
-const rows = [
-    createData(0, '16 Mar, 2019', 'Elvis Presley', 'Tupelo, MS', 'VISA ⠀•••• 3719', 312.44),
-    createData(1, '16 Mar, 2019', 'Paul McCartney', 'London, UK', 'VISA ⠀•••• 2574', 866.99),
-    createData(2, '16 Mar, 2019', 'Tom Scholz', 'Boston, MA', 'MC ⠀•••• 1253', 100.81),
-    createData(3, '16 Mar, 2019', 'Michael Jackson', 'Gary, IN', 'AMEX ⠀•••• 2000', 654.39),
-    createData(4, '15 Mar, 2019', 'Bruce Springsteen', 'Long Branch, NJ', 'VISA ⠀•••• 5919', 212.79),
-];
-
+/**
+ * @author Stavros Lamprinos [stalab at linuxmail.org] on 17/1/2021.
+ */
 
 const useStyles = makeStyles((theme) => ({
     table: {
         marginTop: theme.spacing(3),
-        marginBottom: '3rem',
+        marginBottom: theme.spacing(3),
+    },
+    head: {
+        color: '#002d52',
+        fontSize: '1.1rem'
+    },
+    body: {
+        color: 'black'
     }
 }));
 
 export default function Courses() {
 
-    const [courses, setCourses] = useState(coursesList);
+    const [courses, setCourses] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        setLoading(true);
+
+        //  static data loading until backend logic is implemented
+        setCourses(coursesList);
+        console.log(courses);
+        setLoading(false);
+    }, [courses]);
 
     const classes = useStyles();
 
     return (
         <React.Fragment>
-            <Cockpit title="Μαθήματα" />
-            <Container>
-                <TableContainer component={Paper} className={classes.table}>
-                    <Table size="medium">
-                        <TableHead>
-                            <TableRow>
-                                {courses.headers.map(header => (
-                                    <TableCell key={header.id} align="center">
-                                        {header.name}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {courses.courses.map(course => (
-                                <TableRow key={course.id}>
-                                    <TableCell align="center">{course.time}</TableCell>
-                                    <TableCell align="left">{course.name}</TableCell>
-                                    <TableCell align="center">{course.teacher}</TableCell>
-                                    <TableCell align="center">{course.units}</TableCell>
-                                    <TableCell align="left">{course.type}</TableCell>
+            <Cockpit title="Μαθήματα"/>
+            {loading ?
+                <Spinner/> :
+                <Container>
+                    <TableContainer component={Paper} className={classes.table}>
+                        <Table size="medium">
+                            <TableHead>
+                                <TableRow>
+                                    {courses.headers.map(header => (
+                                        <TableCell key={header.id} align="center" variant="head"
+                                                   className={classes.head}>
+                                            {header.name}
+                                        </TableCell>
+                                    ))}
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-            </Container>
+                            </TableHead>
+                            <TableBody>
+                                {courses.courses.map(course => (
+                                    <TableRow key={course.id}>
+                                        <TableCell align="center">{course.time}</TableCell>
+                                        <TableCell align="left">{course.name}</TableCell>
+                                        <TableCell align="center">{course.teacher}</TableCell>
+                                        <TableCell align="center">{course.units}</TableCell>
+                                        <TableCell align="left"
+                                                   style={{
+                                                       color: course.type === 'Βασικό' ?
+                                                           '#002d52' : 'green'
+                                                   }}>
+                                            {course.type}
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+                </Container>
+            }
         </React.Fragment>
     );
 }

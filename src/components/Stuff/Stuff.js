@@ -3,7 +3,7 @@ import {
     Typography, CardMedia, CardContent,
     Link, Card, useMediaQuery
 } from '@material-ui/core';
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 import '../../assets/images/stuff/s1.jfif'
 
 /**
@@ -11,14 +11,10 @@ import '../../assets/images/stuff/s1.jfif'
  */
 
 const Stuff = props => {
-    // const styles = {
-    //     reverse: props.reverse ? 'row-reverse' : 'row'
-    // }
+
     const useStyles = makeStyles({
         root: {
             maxWidth: '100%',
-            // display: 'flex',
-            // flexDirection: 'row',
             margin: '2rem auto 1rem auto',
         },
         media: {

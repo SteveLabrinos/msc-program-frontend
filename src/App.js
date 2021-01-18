@@ -10,6 +10,7 @@ const FullAnnouncement = React.lazy(() => import(`./containers/FullAnnouncement/
 const Regulation = React.lazy(() => import(`./components/Regulation/Regulation`));
 const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
 const Courses = React.lazy(() => import(`./containers/Courses/Courses`));
+const SignIn = React.lazy(() => import(`./containers/SignIn/SignIn`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -44,6 +45,11 @@ function App() {
               <Route path="/courses" render={() => (
                   <Suspense fallback={ <Spinner /> }>
                       <Courses />
+                  </Suspense>
+              )} />
+              <Route path="/sign-in" render={() => (
+                  <Suspense fallback={ <Spinner /> }>
+                      <SignIn />
                   </Suspense>
               )} />
           </Switch>
