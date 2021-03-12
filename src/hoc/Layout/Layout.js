@@ -70,6 +70,7 @@ class Layout extends Component {
                         <TermsOfUse/>
                     </Modal>
                     <Toolbar drawerToggleClicked={this.sideDrawerToggleHandler}
+                             token={this.props.token}
                              content={this.state.appTitle}/>
                     <SideDrawer
                         open={this.state.showSideDrawer}
