@@ -29,12 +29,7 @@ const userSlice = createSlice({
             state.userLoading = false;
         },
         addUserSuccess: (state, action) => {
-            state.users.push({
-                ...action.payload,
-                createdDate: new Date()
-                    .toISOString()
-                    .replace(/T.*/, '')
-            });
+            state.users.push(action.payload);
             state.userLoading = false;
             state.created = true;
         },
@@ -83,25 +78,26 @@ export const fetchUsers = () => dispatch => {
     getUsers().catch(error => console.log(error));
 };
 
-// export const createNewItem = (item, token) => dispatch => {
-//     const createItem = async () => {
-//         const response = await fetch(`${baseURL}item?tokenId=${token }`, {
-//             method: 'POST',
-//             body: JSON.stringify(item)
-//         });
-//
-//         if (response.ok) {
-//             const id = await response.json();
-//             dispatch(addItemSuccess({...item, id}));
-//         } else {
-//             dispatch(addItemFail(response.status));
-//         }
-//     };
-//     //  function to sent data to the db
-//     dispatch(addItemStart());
-//     //  the async function here
-//     createItem().catch(error => console.log(error));
-// };
+export const createUser = (user, token) => dispatch => {
+    const postUser = async () => {
+        const response = await fetch(`${baseURL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(user)
+        });
+
+        const data = await response.json();
+        response.ok ?
+            dispatch(addUserSuccess(data.data)) :
+            dispatch(userFail(data.messages.join(', ')));
+    };
+
+    dispatch(userStart());
+    postUser().catch(error => console.log(error));
+};
 //
 // export const updateExistingItem = (item, id, token) => dispatch => {
 //     const postItem = async () => {
