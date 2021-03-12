@@ -79,6 +79,10 @@ export default function NavigationItems() {
                         Αρχική
                     </NavigationItem>
                     <NavigationItem
+                        link="/users">
+                        Χρήστες
+                    </NavigationItem>
+                    <NavigationItem
                         link="/courses">
                         Μαθήματα
                     </NavigationItem>

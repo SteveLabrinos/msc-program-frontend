@@ -15,6 +15,7 @@ const Regulation = React.lazy(() => import(`./components/Regulation/Regulation`)
 const Stuff = React.lazy(() => import(`./containers/Stuffs/Stuffs`));
 const Courses = React.lazy(() => import(`./containers/Courses/Courses`));
 const SignIn = React.lazy(() => import(`./containers/Auth/SignIn`));
+const Users = React.lazy(() => import(`./containers/Users/Users`));
 // const Error404 = React.lazy(() => import(`./components/Error404/Error404`));
 
 /**
@@ -72,6 +73,7 @@ function App(props) {
                   <Route path="/regulation" render={props => <Regulation { ...props }/>} />
                   <Route path="/stuff/:type" render={props => <Stuff { ...props }/>} />
                   <Route path="/courses" render={props => <Courses { ...props }/>} />
+                  <Route path="/users" render={props => <Users token={token} { ...props }/>} />
                   <Route path="/" exact render={props => <FrontBuilder { ...props }/>} />
                   <Redirect to="/" />
               </Switch>;
