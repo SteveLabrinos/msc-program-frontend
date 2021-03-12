@@ -16,7 +16,6 @@ export default function Toolbar(props) {
     const history = useHistory();
 
     const handleSignIn = () => {
-        console.log(props.token);
         history.push(`/sign-${props.token ? 'out' : 'in'}`);
     };
 
@@ -30,6 +29,7 @@ export default function Toolbar(props) {
                 <ToolbarInfo content={props.content}/>
                 <Button size="large"
                         onClick={handleSignIn}
+                        style={{ color: 'white' }}
                         color="inherit" disableRipple>
                     {props.token ? 'εξοδος' : 'εισοδος'}
                 </Button>

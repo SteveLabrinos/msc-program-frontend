@@ -66,6 +66,7 @@ export default function SignIn() {
     const errorMsg = authError ?
         <Typography variant="h5" color="error">
             <ErrorOutlineIcon style={{ fontSize: 22 }} />
+            {authError}
         </Typography> : null;
 
     const authRedirect = token ? <Redirect to="/" /> : null;

@@ -55,7 +55,6 @@ function App(props) {
           case 'TEACHER':
               authRouting = <Switch>
                   <Route path="/sign-out" component={Logout} />
-                  <Route path="/sign-out" render={props => <FullAnnouncement { ...props }/>} />
                   <Route path="/announcements/:anId" render={props => <FullAnnouncement { ...props }/>} />
                   <Route path="/announcements" render={props => <AnnouncementsBuilder { ...props }/>} />
                   <Route path="/regulation" render={props => <Regulation { ...props }/>} />
