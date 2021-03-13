@@ -4,7 +4,8 @@ import { Redirect, useParams } from 'react-router';
 
 import { makeStyles } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
-import { clearUserError, userSelector, createUser } from './userSlice';
+import { clearUserError, userSelector, createUser,
+    updateUser, deleteUser } from './userSlice';
 // import { itemSelector, clearItemError, fetchItem, deleteExistingItem,
 //     createNewItem, updateExistingItem } from './itemSlice';
 import Typography from '@material-ui/core/Typography';
@@ -68,20 +69,15 @@ export default function UserCreate({ token }) {
 
     const handleSubmitUser = useCallback(event => {
         event.preventDefault();
-        if (userId) {
-            console.log('Updating user with');
-            console.log({...values, id: Number.parseInt(userId)});
-        } else {
-            dispatch(createUser(values, token));
-        }
 
+        userId ? dispatch(updateUser(values, token, userId)) : dispatch(createUser(values, token));
     }, [userId, dispatch, token, values]);
 
-    // const handleDeleteItem = useCallback(event => {
-    //     event.preventDefault();
-    //
-    //     dispatch(deleteExistingItem(itemId, token));
-    // }, [dispatch, itemId, token]);
+    const handleDeleteUser = useCallback(event => {
+        event.preventDefault();
+
+        dispatch(deleteUser(token, userId));
+    }, [dispatch, userId, token]);
 
     useEffect(() => {
         if (params.id && !created) {
@@ -141,15 +137,8 @@ export default function UserCreate({ token }) {
                         roleTypes={roleTypes}
                         values={values}
                         userId={userId}
+                        deleteUser={handleDeleteUser}
                         submit={handleSubmitUser} />
-                    // <ItemForm submit={handleSubmitItem}
-                    //           deleteItem={handleDeleteItem}
-                    //           id={itemId}
-                    //           values={values}
-                    //           selectedItem={selectedItem}
-                    //           itemTypes={itemTypes}
-                    //           measurementCodes={measurementCodes}
-                    //           change={handleChange} />
                 }
             </div>
         </Container>

@@ -33,20 +33,15 @@ const userSlice = createSlice({
             state.userLoading = false;
             state.created = true;
         },
-        updateUser: (state, action) => {
+        updateUserSuccess: (state, action) => {
             state.users = state.users.map(user => (
                 user.id === action.payload.id ?
-                    {
-                        ...action.payload,
-                        createdDate: new Date()
-                            .toISOString()
-                            .replace(/T.*/, '')
-                    } : user
+                    action.payload : user
             ));
             state.userLoading = false;
             state.created = true;
         },
-        deleteUser: (state, action) => {
+        deleteUserSuccess: (state, action) => {
             state.users = state.users.filter(u => u.id !== action.payload);
             state.userLoading = false;
             state.created = true;
@@ -61,7 +56,7 @@ const userSlice = createSlice({
 });
 
 export const { userStart, fetchUserSuccess, userFail,
-    addUserSuccess, updateUser, deleteUser,
+    addUserSuccess, updateUserSuccess, deleteUserSuccess,
     clearUserError, clearCreated } = userSlice.actions;
 
 //  async actions using thunk and logic actions that dispatch many actions
@@ -98,35 +93,47 @@ export const createUser = (user, token) => dispatch => {
     dispatch(userStart());
     postUser().catch(error => console.log(error));
 };
-//
-// export const updateExistingItem = (item, id, token) => dispatch => {
-//     const postItem = async () => {
-//         const response = await fetch(`${baseURL}item/id/${id}?tokenId=${token}`, {
-//             method: 'PUT',
-//             body: JSON.stringify(item)
-//         });
-//
-//         response.ok ? dispatch(updateItem({...item, id})) : dispatch(addItemFail(response.status));
-//     };
-//     //  function to sent data to the db
-//     dispatch(addItemStart());
-//     //  the async function here
-//     postItem().catch(error => console.log(error));
-// };
-//
-// export const deleteExistingItem = (id, token) => dispatch => {
-//     const removeItem = async () => {
-//         const response = await fetch(`${baseURL}item/id/${id}?tokenId=${token}`, {
-//             method: 'DELETE'
-//         });
-//
-//         response.ok ? dispatch(deleteItem(id)) : dispatch(addItemFail());
-//     };
-//     dispatch(addItemStart());
-//
-//     removeItem().catch(error => console.log(error));
-// };
 
+export const updateUser = (user, token, id) => dispatch => {
+    const patchUser = async () => {
+        const response = await fetch(`${baseURL}/users/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(user)
+        });
+
+        const data = await response.json();
+        response.ok ?
+            dispatch(updateUserSuccess(data.data)) :
+            dispatch(userFail(data.messages.join(', ')));
+    };
+
+    dispatch(userStart());
+    patchUser().catch(error => console.log(error));
+};
+
+export const deleteUser = (token, id) => dispatch => {
+    const delUser = async () => {
+        const response = await fetch(`${baseURL}/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        });
+
+        const data = await response.json();
+        response.ok ?
+            dispatch(deleteUserSuccess(data.data.id)) :
+            dispatch(userFail(data.messages.join(', ')));
+    };
+
+    dispatch(userStart());
+    delUser().catch(error => console.log(error));
+};
 
 //  selectors
 export const userSelector = state => state.user;
