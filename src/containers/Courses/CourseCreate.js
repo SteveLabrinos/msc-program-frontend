@@ -6,7 +6,7 @@ import { makeStyles } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { clearCourseError, courseSelector, createCourse,
     updateCourse, deleteCourse } from './courseSlice';
-import { userSelector, users, fetchUsers } from '../Users/userSlice';
+import { userSelector, fetchUsers } from '../Users/userSlice';
 import Typography from '@material-ui/core/Typography';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Avatar from '@material-ui/core/Avatar';

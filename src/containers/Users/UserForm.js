@@ -97,7 +97,7 @@ export default function UserForm(props) {
                         onChange={change('email')}
                     />
                 </Grid>
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} sm={6} md={4}>
                     <FormControl required fullWidth className={classes.formControl}>
                         <InputLabel id="select-role-label">Τύπος</InputLabel>
                         <Select
@@ -111,6 +111,24 @@ export default function UserForm(props) {
                             {roleTypes.map(type => (
                                 <MenuItem  key={type.code} value={type.code}>{type.value}</MenuItem>
                             ))}
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                    <FormControl fullWidth className={classes.formControl}>
+                        <InputLabel id="select-student-season-label">Εξάμηνο</InputLabel>
+                        <Select
+                            labelId="select-student-season-label"
+                            id="select-student-season"
+                            fullWidth
+                            disabled={values.role !== 'STUDENT'}
+                            value={values.seasonNumber}
+                            onChange={change('seasonNumber')}
+                        >
+                            <MenuItem value={''}>Επιλέξτε</MenuItem>
+                            <MenuItem value={'1'}>1o Εξάμηνο</MenuItem>
+                            <MenuItem value={'2'}>2o Εξάμηνο</MenuItem>
+                            <MenuItem value={'3'}>3o Εξάμηνο</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

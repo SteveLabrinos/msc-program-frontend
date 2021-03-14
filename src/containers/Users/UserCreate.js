@@ -6,8 +6,6 @@ import { makeStyles } from '@material-ui/core';
 import { green } from '@material-ui/core/colors';
 import { clearUserError, userSelector, createUser,
     updateUser, deleteUser } from './userSlice';
-// import { itemSelector, clearItemError, fetchItem, deleteExistingItem,
-//     createNewItem, updateExistingItem } from './itemSlice';
 import Typography from '@material-ui/core/Typography';
 import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
 import Avatar from '@material-ui/core/Avatar';
@@ -60,6 +58,7 @@ export default function UserCreate({ token }) {
         email: '',
         role: '',
         password: '',
+        seasonNumber: ''
     });
 
     const handleChange = property => event => {
@@ -86,13 +85,14 @@ export default function UserCreate({ token }) {
 
             if (selectedUser.length >0) {
                 selectedUser = selectedUser[0];
-                const { firstName, lastName, email, role } = selectedUser;
+                const { firstName, lastName, email, role, seasonNumber } = selectedUser;
                 setValues({
                     firstName,
                     lastName,
                     email,
                     role,
                     password: '',
+                    seasonNumber
                 });
             }
         }

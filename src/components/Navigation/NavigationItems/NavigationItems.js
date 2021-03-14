@@ -86,6 +86,10 @@ export default function NavigationItems() {
                         link="/courses-list">
                         Μαθήματα
                     </NavigationItem>
+                    <NavigationItem
+                        link="/progress">
+                        Πρόοδος
+                    </NavigationItem>
                     <div className={classes.dropdown}>
                         <button className={classes.dropBtn}>
                             Προσωπικό
