@@ -116,8 +116,8 @@ export default function NavigationItems() {
                         Αρχική
                     </NavigationItem>
                     <NavigationItem
-                        link="/courses">
-                        Μαθήματα
+                        link="/enroll">
+                        Δήλωση Μαθημάτων
                     </NavigationItem>
                     <div className={classes.dropdown}>
                         <button className={classes.dropBtn}>
