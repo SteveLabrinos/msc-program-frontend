@@ -17,6 +17,7 @@ const Courses = React.lazy(() => import(`./containers/Courses/Courses`));
 const SignIn = React.lazy(() => import(`./containers/Auth/SignIn`));
 const Users = React.lazy(() => import(`./containers/Users/Users`));
 const UserCreate = React.lazy(() => import(`./containers/Users/UserCreate`));
+const CourseList = React.lazy(() => import(`./containers/Courses/CourseList`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -72,6 +73,7 @@ function App(props) {
                   <Route path="/announcements" render={props => <AnnouncementsBuilder { ...props }/>} />
                   <Route path="/regulation" render={props => <Regulation { ...props }/>} />
                   <Route path="/stuff/:type" render={props => <Stuff { ...props }/>} />
+                  <Route path="/courses-list" render={props => <CourseList token={token} { ...props }/>} />
                   <Route path="/courses" render={props => <Courses { ...props }/>} />
                   <Route path="/users/update/:id" render={props => <UserCreate token={token} { ...props }/>} />
                   <Route path="/users/new" render={props => <UserCreate token={token} { ...props }/>} />

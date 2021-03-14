@@ -83,7 +83,7 @@ export default function NavigationItems() {
                         Χρήστες
                     </NavigationItem>
                     <NavigationItem
-                        link="/courses">
+                        link="/courses-list">
                         Μαθήματα
                     </NavigationItem>
                     <div className={classes.dropdown}>
