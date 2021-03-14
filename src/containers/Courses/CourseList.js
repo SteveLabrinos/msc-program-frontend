@@ -109,7 +109,7 @@ export default function CourseList({ token }) {
         <LoadingProgress /> :
         courses.length === 0 ?
             <Typography variant="h5" component="p">
-                Δεν βρέθηκαν καταχωρημένοι χρήστες
+                Δεν βρέθηκαν καταχωρημένα μαθήματα για το Μεταπτυχιακό Πρόγραμμα Σπουδών
             </Typography> :
             users.length === 0 ?
                 <Typography variant="h5" component="p">
