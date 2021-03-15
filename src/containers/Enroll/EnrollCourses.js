@@ -1,14 +1,14 @@
 import React, { useCallback, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Typography, withStyles } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
 import Cockpit from '../../components/Cockpit/Cockpit';
 import Container from '@material-ui/core/Container';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import { green } from '@material-ui/core/colors';
-import { fetchCourses, courseSelector, clearCreated } from '../Courses/courseSlice';
+import { green, red } from '@material-ui/core/colors';
+import { fetchEnrollCourses, enrollSelector, updateEnrollCourse } from './enrollCourseSlice';
 import { fetchUsers, userSelector } from '../Users/userSlice';
 import LoadingProgress from '../../components/UI/LoadingProgress/LoadingProgress';
 import Table from '@material-ui/core/Table';
@@ -16,9 +16,9 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
-import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
 /**
  * @returns {JSX.Element}
@@ -34,14 +34,6 @@ const StyledTableCell = withStyles((theme) => ({
         fontSize: 14,
     },
 }))(TableCell);
-
-const StyledTableRow = withStyles((theme) => ({
-    root: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-    },
-}))(TableRow);
 
 const useStyles = makeStyles(theme => ({
     containerStyle: {
@@ -63,6 +55,17 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             backgroundColor: green[600],
         },
+    },
+    fabRed: {
+        color: theme.palette.common.white,
+        backgroundColor: red[500],
+        marginRight: theme.spacing(2),
+        '&:hover': {
+            backgroundColor: red[600],
+        },
+    },
+    styledRow: {
+        backgroundColor: theme.palette.success.light
     }
 }));
 
@@ -70,9 +73,8 @@ const useStyles = makeStyles(theme => ({
 export default function EnrollCourses({ token }) {
     const classes = useStyles();
     const dispatch = useDispatch();
-    const history = useHistory();
 
-    const { courseLoading, courses, courseTypes, created } = useSelector(courseSelector);
+    const { enrollLoading, enrollCourses, courseTypes } = useSelector(enrollSelector);
     const { users } = useSelector(userSelector);
 
     //  async dispatch to fetch users
@@ -80,23 +82,22 @@ export default function EnrollCourses({ token }) {
         dispatch(fetchUsers());
     }, [dispatch]);
 
-    const onFetchCourses = useCallback(() => {
-        dispatch(fetchCourses());
-    }, [dispatch]);
+    const onFetchEnrollCourses = useCallback(() => {
+        dispatch(fetchEnrollCourses(token));
+    }, [dispatch, token]);
 
     useEffect(() => {
         if (users.length === 0) {
             onFetchUsers();
         }
-        if (courses.length === 0) {
-            onFetchCourses();
+        if (enrollCourses.length === 0) {
+            onFetchEnrollCourses();
         }
-    }, [onFetchUsers, users.length, onFetchCourses, courses.length]);
+    }, [onFetchUsers, users.length, onFetchEnrollCourses, enrollCourses.length]);
 
-    const handleUpdateCourse = id => {
-        if (created) dispatch(clearCreated());
-        history.push(id ? `courses/update/${id}` : `courses/new`);
-    };
+    const handleUpdateEnrollCourse = useCallback((id, index, status) => {
+        dispatch(updateEnrollCourse(id, index, status));
+    }, [dispatch]);
 
     const mapTeacherName = teacherId => {
         const result = users.filter(u => u.id === teacherId)[0];
@@ -105,75 +106,84 @@ export default function EnrollCourses({ token }) {
 
     const authRedirect = !token? <Redirect to="/sign-in" /> : null;
 
-    const displayCourseList = courseLoading ?
+    const rowStyle = { backgroundColor: '#ccc' };
+
+    const displayCourseList = enrollLoading ?
         <LoadingProgress /> :
-        courses.length === 0 ?
+        enrollCourses.length === 0 ?
             <Typography variant="h5" component="p">
-                Δεν βρέθηκαν καταχωρημένα μαθήματα για το Μεταπτυχιακό Πρόγραμμα Σπουδών
+                Δεν βρέθηκαν καταχωρημένα μαθήματα για το Εξάμηνο φοίτησης
             </Typography> :
             users.length === 0 ?
-                <Typography variant="h5" component="p">
-                    Δεν έχουν καταχωρηθεί καθηγητές για τα μαθήματα
-                </Typography> :
+                <LoadingProgress /> :
                 <TableContainer component={Paper} className={classes.containerStyle}>
                     <Table>
                         <TableHead>
                             <TableRow>
-                                <StyledTableCell align="center">Τίτλος</StyledTableCell>
-                                <StyledTableCell align="center">Καθηγητής</StyledTableCell>
-                                <StyledTableCell align="center">Περιγραφή</StyledTableCell>
-                                <StyledTableCell align="center">Τύπος</StyledTableCell>
                                 <StyledTableCell align="center">Εξάμηνο</StyledTableCell>
+                                <StyledTableCell align="center">Μάθημα</StyledTableCell>
+                                <StyledTableCell align="center">Καθηγητής</StyledTableCell>
                                 <StyledTableCell align="center">ECTS</StyledTableCell>
-                                <StyledTableCell align="center">Τροποποίηση</StyledTableCell>
+                                <StyledTableCell align="center">Τύπος</StyledTableCell>
+                                <StyledTableCell align="center">Βαθμός</StyledTableCell>
+                                <StyledTableCell align="center">Εγγραφή</StyledTableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {courses.map(course => (
-                                <StyledTableRow key={course.id}>
+                            {enrollCourses.map((course, index) => (
+                                <TableRow
+                                    className={course.grade && course.grade >= 5 ? classes.styledRow : null}
+                                    style={!course.registrationId ? rowStyle: null}
+                                    key={index}>
+                                    <TableCell align="center">
+                                        {`${course.season}o`}
+                                    </TableCell>
                                     <TableCell component="th" scope="row" align="center">
                                         {course.title}
                                     </TableCell>
                                     <TableCell align="center">
                                         {mapTeacherName(course.teacherId)}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {course.description}
+                                    <TableCell align="center">
+                                        {course.ects}
                                     </TableCell>
                                     <TableCell align="center">
                                         {courseTypes.filter(t => t.code === course.type)[0].value}
                                     </TableCell>
                                     <TableCell align="center">
-                                        {`${course.season}o`}
+                                        {course.grade}
                                     </TableCell>
                                     <TableCell align="center">
-                                        {course.ects}
+                                        {!course.registrationId ?
+                                            '' :
+                                            course.status === 'REGISTERED' ?
+                                                <Fab aria-label="update"
+                                                     onClick={() => handleUpdateEnrollCourse(course.registrationId,
+                                                         index, course.status)}
+                                                     className={classes.fabRed}
+                                                     size="small">
+                                                    <HighlightOffIcon />
+                                                </Fab> :
+                                                <Fab aria-label="update"
+                                                     onClick={() => handleUpdateEnrollCourse(course.registrationId,
+                                                         index, course.status)}
+                                                     className={classes.fabGreen}
+                                                     size="small">
+                                                    <AddIcon />
+                                                </Fab>
+                                        }
                                     </TableCell>
-                                    <TableCell align="center">
-                                        <Fab aria-label="update"
-                                             onClick={() => handleUpdateCourse(course.id)}
-                                             className={classes.fabGreen}
-                                             size="small">
-                                            <EditIcon />
-                                        </Fab>
-                                    </TableCell>
-                                </StyledTableRow>
+                                </TableRow>
                             ))}
                         </TableBody>
                     </Table>
-                </TableContainer>
+                </TableContainer>;
 
     return (
         <React.Fragment>
             {authRedirect}
             <Cockpit title="Εγγραφές Μαθημάτων"/>
             <Container maxWidth="lg">
-                <Fab color="primary"
-                     className={classes.fab}
-                     aria-label="add"
-                     onClick={() => handleUpdateCourse(null)} >
-                    <AddIcon />
-                </Fab>
                 {displayCourseList}
             </Container>
         </React.Fragment>
