@@ -27,7 +27,9 @@ const gradeSlice = createSlice({
             state.gradeLoading = false;
         },
         updateGradeSuccess: (state, action) => {
-
+            const updatedRegistration = state.gradeStudents[action.payload.index];
+            updatedRegistration.grade = action.payload.grade;
+            state.gradeStudents[action.payload.index] = updatedRegistration;
             state.gradeLoading = false;
             state.created = true;
         },
@@ -57,67 +59,46 @@ export const fetchGradeCourses = token => dispatch => {
     getCourses().catch(error => console.log(error));
 };
 
-// export const createCourse = (course, token) => dispatch => {
-//     const postCourse = async () => {
-//         const response = await fetch(`${baseURL}/courses`, {
-//             method: 'POST',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': token
-//             },
-//             body: JSON.stringify(course)
-//         });
-//
-//         const data = await response.json();
-//         response.ok ?
-//             dispatch(addCourseSuccess(data.data)) :
-//             dispatch(courseFail(data.messages.join(', ')));
-//     };
-//
-//     dispatch(courseStart());
-//     postCourse().catch(error => console.log(error));
-// };
-//
-// export const updateCourse = (course, token, id) => dispatch => {
-//     const patchCourse = async () => {
-//         const response = await fetch(`${baseURL}/courses/${id}`, {
-//             method: 'PATCH',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': token
-//             },
-//             body: JSON.stringify(course)
-//         });
-//
-//         const data = await response.json();
-//         response.ok ?
-//             dispatch(updateCourseSuccess(data.data)) :
-//             dispatch(courseFail(data.messages.join(', ')));
-//     };
-//
-//     dispatch(courseStart());
-//     patchCourse().catch(error => console.log(error));
-// };
-//
-// export const deleteCourse = (token, id) => dispatch => {
-//     const delCourse = async () => {
-//         const response = await fetch(`${baseURL}/courses/${id}`, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': token
-//             }
-//         });
-//
-//         const data = await response.json();
-//         response.ok ?
-//             dispatch(deleteCourseSuccess(data.data.id)) :
-//             dispatch(courseFail(data.messages.join(', ')));
-//     };
-//
-//     dispatch(courseStart());
-//     delCourse().catch(error => console.log(error));
-// };
+export const fetchGradeStudents = (token, courseId) => dispatch => {
+    const getStudents = async () => {
+        const response = await fetch(`${baseURL}/grades/${courseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        });
+
+        const data = await response.json();
+        response.ok ?
+            dispatch(fetchGradeStudentsSuccess(data.data.students)) :
+            dispatch(gradeFail(data.messages.join(', ')));
+    };
+    dispatch(gradeStart());
+    getStudents().catch(error => console.log(error));
+};
+
+export const updateGrade = (registrationId, grade, index, courseId, token) => dispatch => {
+    const patchData = { registrationId, grade };
+    const patchGrade = async () => {
+        const response = await fetch(`${baseURL}/grades/${courseId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(patchData)
+        });
+
+        const data = await response.json();
+        const payload = { index, grade };
+        response.ok ?
+            dispatch(updateGradeSuccess(payload)) :
+            dispatch(gradeFail(data.messages.join(', ')));
+    };
+    dispatch(gradeStart());
+    patchGrade().catch(error => console.log(error));
+};
 
 //  selectors
 export const gradeSelector = state => state.grade;
