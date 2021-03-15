@@ -21,6 +21,7 @@ const CourseList = React.lazy(() => import(`./containers/Courses/CourseList`));
 const CourseCreate = React.lazy(() => import(`./containers/Courses/CourseCreate`));
 const ProgressList = React.lazy(() => import(`./containers/Progress/ProgressList`));
 const EnrollCourses = React.lazy(() => import(`./containers/Enroll/EnrollCourses`));
+const GradesList = React.lazy(() => import(`./containers/Grades/GradesList`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -65,6 +66,7 @@ function App(props) {
                   <Route path="/regulation" render={props => <Regulation { ...props }/>} />
                   <Route path="/stuff/:type" render={props => <Stuff { ...props }/>} />
                   <Route path="/courses" render={props => <Courses { ...props }/>} />
+                  <Route path="/grades" render={props => <GradesList token={token} { ...props }/>} />
                   <Route path="/" exact render={props => <FrontBuilder { ...props }/>} />
                   <Redirect to="/" />
               </Switch>;
