@@ -8,7 +8,7 @@ import Container from '@material-ui/core/Container';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { green, red } from '@material-ui/core/colors';
-import { fetchEnrollCourses, enrollSelector,
+import { fetchEnrollCourses, enrollSelector, decreaseEnrolls, increaseEnrolls,
     updateEnrollCourse, fetchStatistics } from './enrollCourseSlice';
 import { fetchUsers, userSelector } from '../Users/userSlice';
 import { authSelector } from '../Auth/authSlice';
@@ -117,8 +117,14 @@ export default function EnrollCourses({ token }) {
     }, [onFetchUsers, users.length, onFetchEnrollCourses,
         enrollCourses.length, onFetchStatistics, statistics]);
 
+
     const handleUpdateEnrollCourse = useCallback((id, index, status) => {
         dispatch(updateEnrollCourse(id, index, status));
+        if (status === 'NOT_REGISTERED') {
+            dispatch(increaseEnrolls());
+        } else {
+            dispatch(decreaseEnrolls());
+        }
     }, [dispatch]);
 
     const mapTeacherName = teacherId => {

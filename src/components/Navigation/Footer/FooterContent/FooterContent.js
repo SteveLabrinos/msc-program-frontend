@@ -32,7 +32,7 @@ const footerContent = props => {
                 Επικοινωνήστε μαζί μας:
                 <div className={classes.ContactInfo}>
                     <a
-                        href="https://github.com/SteveLabrinos/msc-program-frontend"
+                        href="https://github.com/users/SteveLabrinos/projects/2"
                         target="_blank"
                         rel="noreferrer">
                         <FaGithub className={classes.Icon}/>

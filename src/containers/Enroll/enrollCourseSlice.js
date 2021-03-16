@@ -51,11 +51,22 @@ const enrollCourseSlice = createSlice({
             state.statistics = action.payload;
             state.statisticsLoading = false;
         },
+        decreaseEnrolls: state => {
+            const updatedStatistics = state.statistics;
+            updatedStatistics.enrolls = updatedStatistics.enrolls - 1;
+            state.statistics = updatedStatistics;
+        },
+        increaseEnrolls: state => {
+            const updatedStatistics = state.statistics;
+            updatedStatistics.enrolls = updatedStatistics.enrolls + 1;
+            state.statistics = updatedStatistics;
+        },
     }
 });
 
 export const { enrollStart, fetchEnrollSuccess, enrollFail, statisticsStart,
-    updateEnrollSuccess, clearCreated, statisticsFail, statisticsSuccess } = enrollCourseSlice.actions;
+    updateEnrollSuccess, clearCreated, statisticsFail, increaseEnrolls,
+    statisticsSuccess, decreaseEnrolls } = enrollCourseSlice.actions;
 
 //  async actions using thunk and logic actions that dispatch many actions
 export const fetchEnrollCourses = token => dispatch => {
