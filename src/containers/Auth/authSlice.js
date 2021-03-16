@@ -10,7 +10,8 @@ export const authSlice = createSlice({
         lastName: null,
         sessionId: null,
         authError: null,
-        authLoading: false
+        authLoading: false,
+        userId: null
     },
     reducers: {
         authStart: state => {
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
             state.role = action.payload.role;
             state.firstName = action.payload.firstName;
             state.lastName = action.payload.lastName;
+            state.userId = action.payload.userId;
             state.authError = null;
             state.authLoading = false;
         },
@@ -37,6 +39,7 @@ export const authSlice = createSlice({
             state.firstName = null;
             state.lastName = null;
             state.authLoading = false;
+            state.userId = null;
         }
     }
 });
@@ -62,6 +65,7 @@ export const login = signInData => dispatch => {
             localStorage.setItem('msc-role', data.data.role);
             localStorage.setItem('msc-firstname', data.data.firstName);
             localStorage.setItem('msc-lastname', data.data.lastName);
+            localStorage.setItem('msc-user-id', data.data.userId);
             dispatch(authSuccess(data.data));
         } else {
             dispatch(authFail(data.messages.join(', ')));
@@ -88,6 +92,7 @@ export const logout = (sessionId, token) => dispatch => {
             localStorage.removeItem('msc-role');
             localStorage.removeItem('msc-firstname');
             localStorage.removeItem('msc-lastname');
+            localStorage.removeItem('msc-user-id');
             dispatch(authLogout());
         } else {
             dispatch(authFail(data.messages.join(', ')));
@@ -103,7 +108,8 @@ export const checkAuth = () => dispatch => {
         accessToken: localStorage.getItem('msc-access-token'),
         role: localStorage.getItem('msc-role'),
         firstName: localStorage.getItem('msc-firstname'),
-        lastName: localStorage.getItem('msc-lastname')
+        lastName: localStorage.getItem('msc-lastname'),
+        userId: localStorage.getItem('msc-user-id'),
     };
 
     if (signInData) dispatch(authSuccess(signInData));

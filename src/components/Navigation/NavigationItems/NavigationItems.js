@@ -12,7 +12,6 @@ import { authSelector } from '../../../containers/Auth/authSlice';
 //  Stavros Lamprinos on 12/3/2021.
 export default function NavigationItems() {
     const { token, role } = useSelector(authSelector);
-    console.log(role);
 
     if (!token) {
         return <ul className={classes.NavigationItems}>

@@ -13,6 +13,9 @@ const enrollCourseSlice = createSlice({
             { code: 'MANDATORY', value: 'Υποχρεωτικό'},
             { code: 'NON_MANDATORY', value: 'Προεταιρικό'},
         ],
+        statisticsLoading: false,
+        statisticsError: null,
+        statistics: null,
     },
     reducers: {
         enrollStart: state => {
@@ -37,11 +40,22 @@ const enrollCourseSlice = createSlice({
         clearCreated: state => {
             state.created = false;
         },
+        statisticsStart: state => {
+            state.statisticsLoading = true;
+        },
+        statisticsFail: (state, action) => {
+            state.statisticsError = action.payload;
+            state.statisticsLoading = false;
+        },
+        statisticsSuccess: (state, action) => {
+            state.statistics = action.payload;
+            state.statisticsLoading = false;
+        },
     }
 });
 
-export const { enrollStart, fetchEnrollSuccess, enrollFail,
-    updateEnrollSuccess, clearCreated } = enrollCourseSlice.actions;
+export const { enrollStart, fetchEnrollSuccess, enrollFail, statisticsStart,
+    updateEnrollSuccess, clearCreated, statisticsFail, statisticsSuccess } = enrollCourseSlice.actions;
 
 //  async actions using thunk and logic actions that dispatch many actions
 export const fetchEnrollCourses = token => dispatch => {
@@ -89,26 +103,23 @@ export const updateEnrollCourse = (id, index, status) => dispatch => {
     dispatch(enrollStart());
     patchCourse().catch(error => console.log(error));
 };
-//
-// export const deleteCourse = (token, id) => dispatch => {
-//     const delCourse = async () => {
-//         const response = await fetch(`${baseURL}/courses/${id}`, {
-//             method: 'DELETE',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Authorization': token
-//             }
-//         });
-//
-//         const data = await response.json();
-//         response.ok ?
-//             dispatch(deleteCourseSuccess(data.data.id)) :
-//             dispatch(courseFail(data.messages.join(', ')));
-//     };
-//
-//     dispatch(courseStart());
-//     delCourse().catch(error => console.log(error));
-// };
+
+export const fetchStatistics = id => dispatch => {
+    const getStatistics = async () => {
+        const response = await fetch(`${baseURL}/statistics/${id}`, {
+            method: 'GET'
+        });
+
+        const data = await response.json();
+
+        response.ok ?
+            dispatch(statisticsSuccess({ ...data.data })) :
+            dispatch(statisticsFail(data.messages.join(', ')));
+    };
+
+    dispatch(statisticsStart());
+    getStatistics().catch(error => console.log(error));
+};
 
 //  selectors
 export const enrollSelector = state => state.enrollCourse;

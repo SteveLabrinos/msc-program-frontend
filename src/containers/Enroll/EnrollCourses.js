@@ -8,8 +8,10 @@ import Container from '@material-ui/core/Container';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import { green, red } from '@material-ui/core/colors';
-import { fetchEnrollCourses, enrollSelector, updateEnrollCourse } from './enrollCourseSlice';
+import { fetchEnrollCourses, enrollSelector,
+    updateEnrollCourse, fetchStatistics } from './enrollCourseSlice';
 import { fetchUsers, userSelector } from '../Users/userSlice';
+import { authSelector } from '../Auth/authSlice';
 import LoadingProgress from '../../components/UI/LoadingProgress/LoadingProgress';
 import Table from '@material-ui/core/Table';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -19,6 +21,7 @@ import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import Fab from '@material-ui/core/Fab';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+import Statistics from '../../components/Statistics/Statistics';
 
 /**
  * @returns {JSX.Element}
@@ -37,7 +40,8 @@ const StyledTableCell = withStyles((theme) => ({
 
 const useStyles = makeStyles(theme => ({
     containerStyle: {
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        minHeight: 240
     },
     [theme.breakpoints.down("md")]: {
         containerStyle: {
@@ -66,7 +70,15 @@ const useStyles = makeStyles(theme => ({
     },
     styledRow: {
         backgroundColor: theme.palette.success.light
-    }
+    },
+    paper: {
+        padding: theme.spacing(2),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+        height: 240,
+        marginBottom: theme.spacing(3)
+    },
 }));
 
 
@@ -74,8 +86,10 @@ export default function EnrollCourses({ token }) {
     const classes = useStyles();
     const dispatch = useDispatch();
 
-    const { enrollLoading, enrollCourses, courseTypes } = useSelector(enrollSelector);
+    const { enrollLoading, enrollCourses, courseTypes,
+        statistics, statisticsLoading } = useSelector(enrollSelector);
     const { users } = useSelector(userSelector);
+    const { userId } = useSelector(authSelector);
 
     //  async dispatch to fetch users
     const onFetchUsers = useCallback(() => {
@@ -86,6 +100,10 @@ export default function EnrollCourses({ token }) {
         dispatch(fetchEnrollCourses(token));
     }, [dispatch, token]);
 
+    const onFetchStatistics = useCallback(() => {
+        dispatch(fetchStatistics(userId));
+    }, [dispatch, userId]);
+
     useEffect(() => {
         if (users.length === 0) {
             onFetchUsers();
@@ -93,7 +111,11 @@ export default function EnrollCourses({ token }) {
         if (enrollCourses.length === 0) {
             onFetchEnrollCourses();
         }
-    }, [onFetchUsers, users.length, onFetchEnrollCourses, enrollCourses.length]);
+        if (!statistics) {
+            onFetchStatistics();
+        }
+    }, [onFetchUsers, users.length, onFetchEnrollCourses,
+        enrollCourses.length, onFetchStatistics, statistics]);
 
     const handleUpdateEnrollCourse = useCallback((id, index, status) => {
         dispatch(updateEnrollCourse(id, index, status));
@@ -154,7 +176,7 @@ export default function EnrollCourses({ token }) {
                                         {course.grade}
                                     </TableCell>
                                     <TableCell align="center">
-                                        {!course.registrationId ?
+                                        {!course.registrationId || (course.grade && course.grade >= 5) ?
                                             '' :
                                             course.status === 'REGISTERED' ?
                                                 <Fab aria-label="update"
@@ -179,12 +201,19 @@ export default function EnrollCourses({ token }) {
                     </Table>
                 </TableContainer>;
 
+    const displayStatistics = statisticsLoading || !statistics ?
+        <LoadingProgress /> :
+        <Paper className={classes.paper}>
+            <Statistics title="Στατιστικά Στοιχεία" statistics={statistics} />
+        </Paper>;
+
     return (
         <React.Fragment>
             {authRedirect}
             <Cockpit title="Εγγραφές Μαθημάτων"/>
             <Container maxWidth="lg">
                 {displayCourseList}
+                {displayStatistics}
             </Container>
         </React.Fragment>
     );
