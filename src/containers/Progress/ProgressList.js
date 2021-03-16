@@ -150,27 +150,6 @@ export default function ProgressList({ token }) {
                                     ))}
                             </React.Fragment>
                         ))}
-                        {/*{students.map(user => (*/}
-                        {/*    <StyledTableRow key={user.id}>*/}
-                        {/*        <TableCell component="th" scope="row" align="center">*/}
-                        {/*            {user.firstName}*/}
-                        {/*        </TableCell>*/}
-                        {/*        <TableCell align="center">*/}
-                        {/*            {user.lastName}*/}
-                        {/*        </TableCell>*/}
-                        {/*        <TableCell align="center">*/}
-                        {/*            {user.registrationNumber}*/}
-                        {/*        </TableCell>*/}
-                        {/*        <TableCell align="center">*/}
-                        {/*            <Fab aria-label="update"*/}
-                        {/*                 onClick={() => handleShowProgress(user.id)}*/}
-                        {/*                 className={classes.fabGreen}*/}
-                        {/*                 size="small">*/}
-                        {/*                <VisibilityIcon />*/}
-                        {/*            </Fab>*/}
-                        {/*        </TableCell>*/}
-                        {/*    </StyledTableRow>*/}
-                        {/*))}*/}
                     </TableBody>
                 </Table>
             </TableContainer>

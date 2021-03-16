@@ -23,6 +23,7 @@ const ProgressList = React.lazy(() => import(`./containers/Progress/ProgressList
 const EnrollCourses = React.lazy(() => import(`./containers/Enroll/EnrollCourses`));
 const GradesList = React.lazy(() => import(`./containers/Grades/GradesList`));
 const StudentsList = React.lazy(() => import(`./containers/Grades/StudentsList`));
+const StudentsProgress = React.lazy(() => import(`./containers/Progress/StudentProgress`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -87,6 +88,7 @@ function App(props) {
                   <Route path="/users/update/:id" render={props => <UserCreate token={token} { ...props }/>} />
                   <Route path="/users/new" render={props => <UserCreate token={token} { ...props }/>} />
                   <Route path="/users" render={props => <Users token={token} { ...props }/>} />
+                  <Route path="/progress/:id" render={props => <StudentsProgress token={token} { ...props }/>} />
                   <Route path="/progress" render={props => <ProgressList token={token} { ...props }/>} />
                   <Route path="/" exact render={props => <FrontBuilder { ...props }/>} />
                   <Redirect to="/" />
