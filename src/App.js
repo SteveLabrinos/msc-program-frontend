@@ -24,6 +24,7 @@ const EnrollCourses = React.lazy(() => import(`./containers/Enroll/EnrollCourses
 const GradesList = React.lazy(() => import(`./containers/Grades/GradesList`));
 const StudentsList = React.lazy(() => import(`./containers/Grades/StudentsList`));
 const StudentsProgress = React.lazy(() => import(`./containers/Progress/StudentProgress`));
+const UserUpdate = React.lazy(() => import(`./containers/Users/UserUpdate`));
 
 /**
  * @author Stavros Lamprinos [stalab at linuxmail.org] on 13/1/2021.
@@ -70,6 +71,7 @@ function App(props) {
                   <Route path="/courses" render={props => <Courses { ...props }/>} />
                   <Route path="/grades/:id" render={props => <StudentsList token={token} { ...props }/>} />
                   <Route path="/grades" render={props => <GradesList token={token} { ...props }/>} />
+                  <Route path="/users/:id" render={props => <UserUpdate token={token} { ...props }/>} />
                   <Route path="/" exact render={props => <FrontBuilder { ...props }/>} />
                   <Redirect to="/" />
               </Switch>;
@@ -103,6 +105,7 @@ function App(props) {
                   <Route path="/stuff/:type" render={props => <Stuff { ...props }/>} />
                   <Route path="/courses" render={props => <Courses { ...props }/>} />
                   <Route path="/enroll" render={props => <EnrollCourses token={token} { ...props }/>} />
+                  <Route path="/users/:id" render={props => <UserUpdate token={token} { ...props }/>} />
                   <Route path="/" exact render={props => <FrontBuilder { ...props }/>} />
                   <Redirect to="/" />
               </Switch>;

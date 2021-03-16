@@ -11,7 +11,7 @@ import { authSelector } from '../../../containers/Auth/authSlice';
 //  implemented authorization login to links
 //  Stavros Lamprinos on 12/3/2021.
 export default function NavigationItems() {
-    const { token, role } = useSelector(authSelector);
+    const { token, role, userId } = useSelector(authSelector);
 
     if (!token) {
         return <ul className={classes.NavigationItems}>
@@ -48,6 +48,10 @@ export default function NavigationItems() {
                 return <ul className={classes.NavigationItems}>
                     <NavigationItem link="/" exact home>
                         Αρχική
+                    </NavigationItem>
+                    <NavigationItem
+                        link={`/users/${userId}`}>
+                        Ενημέρωση Στοιχείων
                     </NavigationItem>
                     <NavigationItem
                         link="/grades">
@@ -114,6 +118,10 @@ export default function NavigationItems() {
                 return <ul className={classes.NavigationItems}>
                     <NavigationItem link="/" exact home>
                         Αρχική
+                    </NavigationItem>
+                    <NavigationItem
+                        link={`/users/${userId}`}>
+                        Ενημέρωση Στοιχείων
                     </NavigationItem>
                     <NavigationItem
                         link="/enroll">

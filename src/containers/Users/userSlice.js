@@ -65,8 +65,16 @@ export const fetchUsers = () => dispatch => {
         const response = await fetch(`${baseURL}/users`);
 
         const data = await response.json();
+        const setData = data.data.users.map(user => {
+            const birthDate = user.birthDate ? new Date(user.birthDate)
+                .toISOString()
+                .replace(/T.*/, '')
+                .split('-')
+                .join('-') : '';
+            return {...user, birthDate};
+        });
         response.ok ?
-            dispatch(fetchUserSuccess(data.data.users)) :
+            dispatch(fetchUserSuccess(setData)) :
             dispatch(userFail(data.messages.join(', ')));
     };
     dispatch(userStart());
@@ -95,6 +103,13 @@ export const createUser = (user, token) => dispatch => {
 };
 
 export const updateUser = (user, token, id) => dispatch => {
+    user.birthDate = new Date(user.birthDate)
+        .toISOString()
+        .replace(/T.*/, '')
+        .split('-')
+        .reverse()
+        .join('/');
+
     const patchUser = async () => {
         const response = await fetch(`${baseURL}/users/${id}`, {
             method: 'PATCH',
