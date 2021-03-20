@@ -66,11 +66,18 @@ export const fetchUsers = () => dispatch => {
 
         const data = await response.json();
         const setData = data.data.users.map(user => {
-            const birthDate = user.birthDate ? new Date(user.birthDate)
-                .toISOString()
-                .replace(/T.*/, '')
-                .split('-')
-                .join('-') : '';
+            let birthDate = null;
+            if (user.birthDate) {
+                console.log(user.birthDate);
+                birthDate = Date.parse(user.birthDate);
+                if (!isNaN(birthDate)) {
+                    birthDate = user.birthDate ? new Date(user.birthDate)
+                        .toISOString()
+                        .replace(/T.*/, '')
+                        .split('-')
+                        .join('-') : '';
+                }
+            }
             return {...user, birthDate};
         });
         response.ok ?
@@ -103,12 +110,14 @@ export const createUser = (user, token) => dispatch => {
 };
 
 export const updateUser = (user, token, id) => dispatch => {
-    user.birthDate = new Date(user.birthDate)
-        .toISOString()
-        .replace(/T.*/, '')
-        .split('-')
-        .reverse()
-        .join('/');
+    if (user.birthDate) {
+        user.birthDate = new Date(user.birthDate)
+            .toISOString()
+            .replace(/T.*/, '')
+            .split('-')
+            .reverse()
+            .join('/');
+    }
 
     const patchUser = async () => {
         const response = await fetch(`${baseURL}/users/${id}`, {

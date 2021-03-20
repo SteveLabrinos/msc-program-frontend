@@ -137,6 +137,7 @@ export default function UserFullForm(props) {
                 <Grid item xs={12} sm={6} md={4}>
                     <TextField
                         required
+                        inputProps={{ minLength: 8 }}
                         fullWidth
                         type="password"
                         id="password"

@@ -192,7 +192,10 @@ export default function EnrollCourses({ token }) {
                                                      size="small">
                                                     <HighlightOffIcon />
                                                 </Fab> :
-                                                <Fab aria-label="update"
+                                                <Fab disabled={statistics ? (statistics.enrolls >= 4) ||
+                                                    (course.type === 'MANDATORY' && statistics.mandatoryCourses >= 7 ) ||
+                                                    (course.type === 'NON_MANDATORY' && statistics.nonMandatoryCourses >= 1) : false}
+                                                     aria-label="update"
                                                      onClick={() => handleUpdateEnrollCourse(course.registrationId,
                                                          index, course.status)}
                                                      className={classes.fabGreen}
