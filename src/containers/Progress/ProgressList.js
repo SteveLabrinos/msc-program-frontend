@@ -17,6 +17,12 @@ import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import VisibilityIcon from '@material-ui/icons/Visibility';
 import Fab from '@material-ui/core/Fab';
+import Grid from '@material-ui/core/Grid';
+import InputLabel from "@material-ui/core/InputLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Button from "@material-ui/core/Button";
 
 /**
  * @returns {JSX.Element}
@@ -61,6 +67,18 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             backgroundColor: green[600],
         },
+    },
+    formControl: {
+        minWidth: 250,
+    },
+    reportContainer: {
+        marginBottom: theme.spacing(4),
+        marginTop: theme.spacing(1)
+    },
+    submit: {
+        letterSpacing: 1.2,
+        marginTop: theme.spacing(2),
+        textTransform: 'capitalize'
     }
 }));
 
@@ -95,6 +113,12 @@ export default function ProgressList({ token }) {
 
     const handleShowProgress = id => {
         history.push(`progress/${id}`);
+    };
+
+    const [season, setSeason] = useState('1');
+
+    const changeSeasonHandler = seasonNumber => {
+        setSeason(seasonNumber);
     };
 
     const authRedirect = !token? <Redirect to="/sign-in" /> : null;
@@ -152,13 +176,53 @@ export default function ProgressList({ token }) {
                         ))}
                     </TableBody>
                 </Table>
-            </TableContainer>
+            </TableContainer>;
+    //  created link to students list as XSL for exercise 4 needs. staLab on 26/4/21.
+    const studentList =
+        <React.Fragment>
+                <Typography variant="h5" component="h4" color="primary">
+                    Εμφάνιση Λίστας Φοιτητών Εξαμήνου
+                </Typography>
+                <Grid container spacing={3} alignItems="center" className={classes.reportContainer}>
+                    <Grid item xs={12} md={6}>
+                        <FormControl fullWidth className={classes.formControl}>
+                            <InputLabel id="select-season-label">Εξάνημο</InputLabel>
+                            <Select
+                                labelId="select-season-label"
+                                id="select-season"
+                                fullWidth
+                                value={season}
+                                onChange={(event) => changeSeasonHandler(event.target.value)}
+                            >
+                                {seasons.map(type => (
+                                    <MenuItem  key={type.code} value={type.code}>{type.value}</MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12} md={6}>
+                        <Button
+                            fullWidth
+                            size="large"
+                            variant="contained"
+                            color="primary"
+                            href={`http://localhost/msc/season-report/${season}`}
+                            target="_blank"
+                            rel="noreferrer"
+                            className={classes.submit}
+                        >
+                            Εμφάνιση Λίστας
+                        </Button>
+                    </Grid>
+                </Grid>
+        </React.Fragment>;
 
     return (
         <React.Fragment>
             {authRedirect}
             <Cockpit title="Πρόοδος Φοιτητών"/>
             <Container maxWidth="lg">
+                {studentList}
                 {displayUserList}
             </Container>
         </React.Fragment>
